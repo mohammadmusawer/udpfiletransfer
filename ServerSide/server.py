@@ -28,7 +28,6 @@ while True:
         file.write(data)
     connection.close()
     file.close()
-    break
 
     print("Data has been transmitted successfully")  # display that data has been transferred
-
+    break
