@@ -33,7 +33,7 @@ def transmitFile(hostAddress, fileName):
 
     # loop to keep sending packets and prints the packet number that is being sent
     for x in range(1, numOfPackets + 1):
-        numOfPacketsSend_String = f"Receiving packet #{x} from client..."
+        numOfPacketsSend_String = f"Sending packet #{x} the server..."
         print(numOfPacketsSend_String)
         data = fileToSend.read(1024)
         socketVar.send(data)
