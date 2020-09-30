@@ -27,7 +27,6 @@ while True:
         data = connection.recv(1024)
         file.write(data)
     connection.close()
-    file.close()
 
     print("Data has been transmitted successfully")  # display that data has been transferred
-    break #end program after transmitting file
+    break                                               #added a break statement to end the loop after file transmitted
