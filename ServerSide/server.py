@@ -1,4 +1,4 @@
-import socket  # module to establish connection
+import socket
 
 # initializes the socket obj, hostname and port and binds it to the server
 socketVar = socket.socket()
@@ -37,4 +37,3 @@ while True:
     file.close()
 
     print("\nData has been transmitted successfully!\n")  # display that data has been transferred
-    break
