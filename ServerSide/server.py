@@ -1,3 +1,9 @@
+#This is the server side of a client/server pair. It receives an image from the client in 1024kb packets
+#Network Design. Prof Vokkarane
+#Due 9/30/20
+#Submitted 9/30/20
+#By: Julie Dawley, Mohammad Musawer, and Ricardo Candanedo
+
 import socket
 
 # initializes the socket obj, hostname and port and binds it to the server
@@ -16,9 +22,8 @@ while True:
 
     print(address, "Has connected to the server")
 
-    # receives the fileName and packets from the client and decodes it
+    # receives the fileName and number of packets from the client
     fileName = connection.recv(1024)
-    print(fileName)
     fileName = fileName.decode()
     numOfPackets = connection.recv(1024)
     decodedNumOfPackets = numOfPackets.decode()
@@ -36,4 +41,4 @@ while True:
     connection.close()
     file.close()
 
-    print("\nData has been transmitted successfully!\n")  # display that data has been transferred
+    print("\nData has been transmitted successfully!\n")

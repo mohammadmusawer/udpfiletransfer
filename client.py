@@ -1,3 +1,10 @@
+#This is the client side of a client/server pair. It sends an image to the server in 1024kb packets
+#It has a basic gui to gather information from the user
+#Network Design. Prof Vokkarane
+#Due 9/30/20
+#Submitted 9/30/20
+#By: Julie Dawley, Mohammad Musawer, and Ricardo Candanedo
+
 import socket
 import tkinter as tk
 import time
