@@ -12,29 +12,26 @@ def transmitFile(hostAddress, fileName):
 
     fileToSend = open(fileName, 'rb')  # open file in write-binary
 
-    fileToSend.seek(0, 2)
-    fileLength = fileToSend.tell()
-    numOfPackets = int(fileLength / 1024) + 1
-    fileToSend.seek(0, 0)
-    print(fileLength)
-    print(fileName)
-    print(numOfPackets)
+    fileToSend.seek(0, 2)    # set offset to the beginning and seek relative to the end of file
+    fileLength = fileToSend.tell()   # after seeking the file return the current position
+    numOfPackets = int(fileLength / 1024) + 1   # calculate number of packets
+    fileToSend.seek(0, 0)   # set offset to
+    print(fileLength)       # display file length
+    print(fileName)         #display file name
+    print(numOfPackets)     #display number of packets
 
-    encodedFileName = fileName.encode()
-    socketVar.send(encodedFileName)
-    time.sleep(1)
-    stringNumOfPackets = str(numOfPackets)
-    encodedStringNumOfPackets = stringNumOfPackets.encode()
-    socketVar.send(encodedStringNumOfPackets)
+    encodedFileName = fileName.encode()     # encode the file name
+    socketVar.send(encodedFileName)         # send the encoded file name through the socket
+    time.sleep(1)                           # delay 1 second
+    stringNumOfPackets = str(numOfPackets)  # convert number of packets into a string
+    encodedStringNumOfPackets = stringNumOfPackets.encode()  # encode the number of packets string
+    socketVar.send(encodedStringNumOfPackets)   # send the encoded string through the socket
 
+    # loop to keep sending packets
     for x in range(0, numOfPackets):
         data = fileToSend.read(1024)
         socketVar.send(data)
-
-
-
     fileToSend.close()
-
     return
 
 def sendFile(event):
@@ -45,6 +42,7 @@ def sendFile(event):
     window.quit()
     transmitFile(hostAddress, fileName)
     return
+
 #Get the name of this machine to use as a default address
 defaultServerName = socket.gethostname()
 window = tk.Tk()
