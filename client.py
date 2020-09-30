@@ -29,9 +29,6 @@ def transmitFile(hostAddress, fileName):
     for x in range(0, numOfPackets):
         data = fileToSend.read(1024)
         socketVar.send(data)
-
-
-
     fileToSend.close()
 
     return
@@ -64,18 +61,18 @@ lbl_introduction.pack()
 #Get the destination name from the user, default to defaultServerName
 ent_destination = tk.Entry()
 ent_destination.pack()
-ent_destination.insert(0,defaultServerName)
+ent_destination.insert(0, defaultServerName)
 #hostAddress = ent_destination.get()
 
 #get the file name from the user. Default to receivedFile.jpg
-lbl_getFileName = tk.Label(text = "\n Enter the name the file should have at the destination")
+lbl_getFileName = tk.Label(text="\n Enter the name the file should have at the destination")
 ent_fileName = tk.Entry()
 lbl_getFileName.pack()
 ent_fileName.pack()
-ent_fileName.insert(0,"adventuretime.jpg")
+ent_fileName.insert(0, "adventuretime.jpg")
 
 
-btn_confirmEntry = tk.Button(text = "Transmit File", height = 2, width = 10)
+btn_confirmEntry = tk.Button(text="Transmit File", height=2, width=10)
 btn_confirmEntry.pack()
 btn_confirmEntry.bind('<Button-1>', sendFile)
 

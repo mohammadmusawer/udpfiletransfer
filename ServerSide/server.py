@@ -6,7 +6,7 @@ port = 8090                                                                 #set
 socketVar.bind((hostName, port))                                            #bind server to host/port
 socketVar.listen(1)                                                         #wait for 1 incoming connection
 
-print(hostName)                                                             #display host name                                     #display server is waiting for connection
+print(hostName)                                                             #display host name
 
 while True:
     print("Waiting for connection...")
@@ -23,10 +23,11 @@ while True:
 
     file = open(fileName, 'wb')
 
-    for x in range(0,numOfPackets):
+    for x in range(0, numOfPackets):
         data = connection.recv(1024)
         file.write(data)
     connection.close()
+    file.close()
 
     print("Data has been transmitted successfully")  # display that data has been transferred
 
