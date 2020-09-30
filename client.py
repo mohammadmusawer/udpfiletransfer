@@ -1,6 +1,6 @@
 import socket                                                          #module to establish connection
 import tkinter as tk
-
+import time
 def transmitFile(hostAddress, fileName):
     #function to transmit the file. Contains the code copy/pasted from phase1
     #takes as input the host address to send the file to and the name for the file upon arrival
@@ -9,17 +9,41 @@ def transmitFile(hostAddress, fileName):
     port = 8090  # set client port to 8090
     socketVar.connect((hostAddress, port))  # connect to host address
 
-    file = open(fileName, 'wb')  # open file in write-binary
-    data = socketVar.recv(500000)  # read the data from the file
-    file.write(data)  # write the data into a new file
-    file.close()
+    fileToSend = open(fileName, 'rb')  # open file in write-binary
+
+    fileToSend.seek(0, 2)
+    fileLength = fileToSend.tell()
+    numOfPackets = int(fileLength / 1024) + 1
+    fileToSend.seek(0, 0)
+    print(fileLength)
+    print(fileName)
+    print(numOfPackets)
+
+    encodedFileName = fileName.encode()
+    socketVar.send(encodedFileName)
+    time.sleep(1)
+    stringNumOfPackets = str(numOfPackets)
+    encodedStringNumOfPackets = stringNumOfPackets.encode()
+    socketVar.send(encodedStringNumOfPackets)
+
+    for x in range(0, numOfPackets):
+        data = fileToSend.read(1024)
+        socketVar.send(data)
+
+
+
+    fileToSend.close()
 
     return
 
 def sendFile(event):
     #event to send the file once the user has clicked the "Send file" button
+    hostAddress = ent_destination.get()
+    fileName = ent_fileName.get()
+    print(fileName)
+
     window.quit()
-    # transmitFile(hostAddress, fileName)
+    transmitFile(hostAddress, fileName)
 
     return
 
@@ -41,15 +65,15 @@ lbl_introduction.pack()
 ent_destination = tk.Entry()
 ent_destination.pack()
 ent_destination.insert(0,defaultServerName)
-hostAddress = ent_destination.get()
+#hostAddress = ent_destination.get()
 
 #get the file name from the user. Default to receivedFile.jpg
 lbl_getFileName = tk.Label(text = "\n Enter the name the file should have at the destination")
 ent_fileName = tk.Entry()
 lbl_getFileName.pack()
 ent_fileName.pack()
-ent_fileName.insert(0,"receivedFile.jpg")
-fileName =  ent_fileName.get()
+ent_fileName.insert(0,"adventuretime.jpg")
+
 
 btn_confirmEntry = tk.Button(text = "Transmit File", height = 2, width = 10)
 btn_confirmEntry.pack()
