@@ -26,8 +26,9 @@ while True:
     for x in range(0, numOfPackets):
         data = connection.recv(1024)
         file.write(data)
+
     connection.close()
     file.close()
 
-    print("Data has been transmitted successfully")  # display that data has been transferred
+    print("Data has been transmitted successfully \n")  # display that data has been transferred
 
