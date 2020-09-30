@@ -44,13 +44,26 @@ def transmitFile(hostAddress, fileName):
 
     return
 
+def closeProgram(event):
+    window.quit()
+    return
+
 def sendFile(event):
     # event to send the file once the user has clicked the "Send file" button
     hostAddress = ent_destination.get()
     fileName = ent_fileName.get()
     print(fileName)
-    window.quit()
+
+    window.destroy()
     transmitFile(hostAddress, fileName)
+
+    lbl_FileSent = tk.Label(text="The file has been sent.")
+    lbl_FileSent.pack()
+
+    btn_confirmExit = tk.Button(text="Click to exit.", width=16, height=2)
+    btn_confirmExit.pack()
+    btn_confirmExit.bind('<Button-1>', closeProgram)
+
     return
 
 # get the name of this machine to use as a default address
