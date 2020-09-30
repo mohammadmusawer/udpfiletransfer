@@ -30,4 +30,4 @@ while True:
     file.close()
 
     print("Data has been transmitted successfully")  # display that data has been transferred
-    break
+    break #end program after transmitting file
