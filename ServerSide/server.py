@@ -36,5 +36,5 @@ while True:
     connection.close()
     file.close()
 
-    print("\nData has been transmitted successfully!")  # display that data has been transferred
+    print("\nData has been transmitted successfully!\n")  # display that data has been transferred
     break
