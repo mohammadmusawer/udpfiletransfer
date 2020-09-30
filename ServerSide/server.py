@@ -23,12 +23,14 @@ while True:
 
     file = open(fileName, 'wb')  # open the file in write-binary
 
-    # loop to keep receiving packets
-    for x in range(0, numOfPackets):
+    # loops to keep receiving packets and prints the packets being received from the client
+    for x in range(1, numOfPackets + 1):
+        numOfPacketsRecv_String = f"Receiving packet #{x} from client..."
+        print (numOfPacketsRecv_String)
         data = connection.recv(1024)
         file.write(data)
     connection.close()
     file.close()
 
-    print("Data has been transmitted successfully")  # display that data has been transferred
+    print("\nData has been transmitted successfully!")  # display that data has been transferred
     break  # end the program after transmitting file
